@@ -2,7 +2,7 @@
 {
     public interface IApplicationFile
     {
-        Task Upload(List<IFormFile> image, int productId);
+        Task UploadImages(List<IFormFile> files, int productId, string? customFilePath);
 
         Task Delete(int id);
     }
