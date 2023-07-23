@@ -23,14 +23,15 @@ namespace Ecommerce.Authentication
         {
             var user = await _userManager.FindByEmailAsync(login.Email);
 
-            if (user is null) return new UnauthorizedObjectResult("Invalid Email");
+            if (user is null) return new UnauthorizedObjectResult("Invalid Password or Email");
 
             var result = await _userManager.CheckPasswordAsync(user, login.Password);
 
-            if (!result) return new UnauthorizedObjectResult("Invalid Password");
+            if (!result) return new UnauthorizedObjectResult("Invalid Password or Email");
 
             var claims = new Claim[]
             {
+                new Claim(ClaimTypes.NameIdentifier , user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };

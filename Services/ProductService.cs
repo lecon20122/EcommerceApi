@@ -33,7 +33,7 @@ namespace Ecommerce.Services
 
             await _context.SaveChangesAsync();
 
-            await _file.Upload(product.Images, newProduct.Entity.Id);
+            await _file.UploadImages(product.Images, newProduct.Entity.Id, null);
 
             return newProduct.Entity;
         }
@@ -44,6 +44,8 @@ namespace Ecommerce.Services
 
             if (product == null)
                 throw new Exception("Product not found");
+
+            _file.Delete(product.Id);
 
             var result = _context.Products.Remove(product);
 

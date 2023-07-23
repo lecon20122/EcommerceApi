@@ -18,5 +18,6 @@ namespace Ecommerce.Models
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public List<ProductImage>? ProductImage { get; set; }
+        public List<Cart>? Cart { get; set; }
     }
 }

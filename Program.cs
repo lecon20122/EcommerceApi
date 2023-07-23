@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -21,21 +22,52 @@ builder.Services
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// enable JWT Auth Bearer Token in Swagger
+builder.Services.AddSwaggerGen(
+            setup =>
+            {
+                var jwtSecurityScheme = new OpenApiSecurityScheme
+                {
+                    BearerFormat = "JWT",
+                    Name = "JWT Authentication",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+                setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { jwtSecurityScheme, Array.Empty<string>() }
+                });
+            }
+    );
 
 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options => options.User.RequireUniqueEmail = true)
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IAuthenticate, Authentication>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IApplicationFile, ImageService>();
+builder.Services.AddScoped<IApplicationFile, UploadService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 
 builder.Services.AddAuthentication
@@ -65,6 +97,10 @@ builder.Services.AddAuthentication
 
 
 var app = builder.Build();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
