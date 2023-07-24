@@ -41,7 +41,6 @@ namespace Ecommerce.Services
             }
             else
             {
-
                 var product = await _context.Products.FindAsync(cart.ProductId);
 
                 if (product == null) throw new Exception("Product not found");
@@ -51,15 +50,22 @@ namespace Ecommerce.Services
                 var newCartItem = await _context.Carts.AddAsync(new Cart
                 {
                     ProductId = cart.ProductId,
-                    Quantity = cart.Quantity,
+                    Quantity = (int)cart.Quantity,
                     UserId = _userId
-                }); ;
+                });
 
                 await _context.SaveChangesAsync();
 
                 return newCartItem.Entity;
             }
 
+        }
+
+        public async Task ClearCart()
+        {
+            await _context.Carts
+                .Where(c => c.UserId == _userId)
+                .ForEachAsync(c => _context.Carts.Remove(c));
         }
 
         public async Task DeleteCartItem(int id)

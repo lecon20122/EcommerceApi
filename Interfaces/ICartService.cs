@@ -7,5 +7,6 @@ namespace Ecommerce.Interfaces
         Task<List<Cart>> GetCartItems();
         Task<Cart> AddCartItem(AddCartItemRequest cart);
         Task DeleteCartItem(int id);
+        Task ClearCart();
     }
 }
