@@ -6,7 +6,7 @@ namespace Ecommerce.Models
     {
         public int ProductId { get; set; }
         [DefaultValue(1)]
-        public int? Quantity { get; set; }
+        public int Quantity { get; set; }
         public int? UserId { get; set; }
     }
 }
