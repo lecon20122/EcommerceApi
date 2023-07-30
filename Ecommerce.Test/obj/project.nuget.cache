@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GAUtdWZ9quOdtbao7+e7VqOFBGmblHhIeMwtjQkORNItqV7b/L01NunrOBceEwuoFw9VdWyyDrmVnkKjbeg9Mw==",
+  "dgSpecHash": "cCUx/fe5Y8FU2VabkRCePu5uyAIdKrfWNgeOWhyx9aiUVPNLxVbxbFT2Df6jjUbOcjAnm5lquOb2IM1j1sJLRg==",
   "success": true,
   "projectFilePath": "H:\\C#\\Projects\\Ecommerce.API\\Ecommerce.Test\\Ecommerce.Test.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,7 @@
     "C:\\Users\\Mustafa\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.9\\microsoft.entityframeworkcore.7.0.9.nupkg.sha512",
     "C:\\Users\\Mustafa\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.9\\microsoft.entityframeworkcore.abstractions.7.0.9.nupkg.sha512",
     "C:\\Users\\Mustafa\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.9\\microsoft.entityframeworkcore.analyzers.7.0.9.nupkg.sha512",
+    "C:\\Users\\Mustafa\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.9\\microsoft.entityframeworkcore.inmemory.7.0.9.nupkg.sha512",
     "C:\\Users\\Mustafa\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.9\\microsoft.entityframeworkcore.relational.7.0.9.nupkg.sha512",
     "C:\\Users\\Mustafa\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.9\\microsoft.entityframeworkcore.sqlserver.7.0.9.nupkg.sha512",
     "C:\\Users\\Mustafa\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
